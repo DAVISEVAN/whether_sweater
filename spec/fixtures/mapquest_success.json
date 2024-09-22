@@ -1,0 +1,31 @@
+{
+    "info": {
+      "statuscode": 0,
+      "copyright": {
+        "text": "© 2024 MapQuest, Inc.",
+        "imageUrl": "http://api.mqcdn.com/res/mqlogo.gif",
+        "imageAltText": "© 2024 MapQuest, Inc."
+      },
+      "messages": []
+    },
+    "options": {
+      "maxResults": -1,
+      "ignoreLatLngInput": false
+    },
+    "results": [
+      {
+        "providedLocation": {
+          "location": "Sacramento,CA"
+        },
+        "locations": [
+          {
+            "latLng": {
+              "lat": 38.57944,
+              "lng": -121.49085
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

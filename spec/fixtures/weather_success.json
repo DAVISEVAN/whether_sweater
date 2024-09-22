@@ -1,0 +1,55 @@
+{
+    "location": {
+      "name": "Sacramento",
+      "region": "California",
+      "country": "United States of America",
+      "lat": 38.58,
+      "lon": -121.49,
+      "tz_id": "America/Los_Angeles",
+      "localtime_epoch": 1727010913,
+      "localtime": "2024-09-22 06:15"
+    },
+    "current": {
+      "last_updated": "2024-09-22 06:00",
+      "temp_f": 60.1,
+      "condition": {
+        "text": "Clear",
+        "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png"
+      },
+      "humidity": 80,
+      "feelslike_f": 60.1,
+      "vis_miles": 9.0,
+      "uv": 1.0
+    },
+    "forecast": {
+      "forecastday": [
+        {
+          "date": "2024-09-22",
+          "day": {
+            "maxtemp_f": 102.2,
+            "mintemp_f": 59.4,
+            "condition": {
+              "text": "Sunny",
+              "icon": "//cdn.weatherapi.com/weather/64x64/day/113.png"
+            }
+          },
+          "astro": {
+            "sunrise": "06:54 AM",
+            "sunset": "07:02 PM"
+          },
+          "hour": [
+            {
+              "time": "2024-09-22 00:00",
+              "temp_f": 67.4,
+              "condition": {
+                "text": "Clear ",
+                "icon": "//cdn.weatherapi.com/weather/64x64/night/113.png"
+              }
+            }
+            // ...other hourly data
+          ]
+        }
+      ]
+    }
+  }
+  

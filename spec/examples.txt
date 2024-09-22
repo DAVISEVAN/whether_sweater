@@ -1,0 +1,8 @@
+example_id                                                | status | run_time        |
+--------------------------------------------------------- | ------ | --------------- |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:1:1]         | passed | 0.04622 seconds |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:2:1]         | passed | 0.00263 seconds |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:1:1] | passed | 0.0014 seconds  |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:2:1] | passed | 0.00069 seconds |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:1:1]   | passed | 0.0016 seconds  |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:2:1]   | passed | 0.00175 seconds |

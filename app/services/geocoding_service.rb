@@ -1,11 +1,22 @@
 class GeocodingService
   def self.get_coordinates(location)
-    response = Faraday.get("http://www.mapquestapi.com/geocoding/v1/") do |req|
-      req.params['key'] = ENV['MAPQUEST_API_KEY']
+    response = Faraday.get("http://www.mapquestapi.com/geocoding/v1/address") do |req|
+      req.params['key'] = Rails.application.credentials[:mapquest_api_key] # Updated to use Rails credentials
       req.params['location'] = location
     end
-    json = JSON.parse(response.body, symbolize_names: true)
-    lat_lng = json[:results][0][:locations][0][:latLng]
-    { lat: lat_lng[:lat], lng: lat_lng[:lng] }
+
+    data = JSON.parse(response.body, symbolize_names: true)
+
+    if data[:results].any? && data[:results][0][:locations].any?
+      {
+        lat: data[:results][0][:locations][0][:latLng][:lat],
+        lng: data[:results][0][:locations][0][:latLng][:lng]
+      }
+    else
+      { lat: nil, lng: nil }
+    end
+  rescue Faraday::Error, JSON::ParserError => e
+    Rails.logger.error("GeocodingService Error: #{e.message}")
+    { lat: nil, lng: nil }
   end
 end
