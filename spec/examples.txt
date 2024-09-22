@@ -1,10 +1,12 @@
 example_id                                                | status | run_time        |
 --------------------------------------------------------- | ------ | --------------- |
-./spec/requests/api/v1/forecasts_spec.rb[1:1:1:1]         | passed | 0.04477 seconds |
-./spec/requests/api/v1/forecasts_spec.rb[1:1:2:1]         | passed | 0.0024 seconds  |
-./spec/requests/api/v1/geocoding_service_spec.rb[1:1:1:1] | passed | 0.00112 seconds |
-./spec/requests/api/v1/geocoding_service_spec.rb[1:1:2:1] | passed | 0.00068 seconds |
-./spec/requests/api/v1/users_spec.rb[1:1:1:1]             | passed | 0.02282 seconds |
-./spec/requests/api/v1/users_spec.rb[1:1:2:1]             | passed | 0.14354 seconds |
-./spec/requests/api/v1/weather_service_spec.rb[1:1:1:1]   | passed | 0.0014 seconds  |
-./spec/requests/api/v1/weather_service_spec.rb[1:1:2:1]   | passed | 0.00094 seconds |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:1:1]         | passed | 0.0447 seconds  |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:2:1]         | passed | 0.00245 seconds |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:1:1] | passed | 0.00115 seconds |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:2:1] | passed | 0.00071 seconds |
+./spec/requests/api/v1/sessions_spec.rb[1:1:1:1]          | passed | 0.0337 seconds  |
+./spec/requests/api/v1/sessions_spec.rb[1:1:2:1]          | passed | 0.00484 seconds |
+./spec/requests/api/v1/users_spec.rb[1:1:1:1]             | passed | 0.00511 seconds |
+./spec/requests/api/v1/users_spec.rb[1:1:2:1]             | passed | 0.15269 seconds |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:1:1]   | passed | 0.00135 seconds |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:2:1]   | passed | 0.00095 seconds |
