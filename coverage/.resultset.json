@@ -254,6 +254,28 @@
         "branches": {
         }
       },
+      "/Users/evandavis/Desktop/whether_sweater/app/controllers/api/v1/book_search_controller.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/evandavis/Desktop/whether_sweater/app/jobs/application_job.rb": {
         "lines": [
           0,
@@ -276,8 +298,25 @@
         ],
         "branches": {
         }
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/services/book_search_service.rb": {
+        "lines": [
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1727104075
+    "timestamp": 1727105620
   }
 }
