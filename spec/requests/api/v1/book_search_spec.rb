@@ -6,7 +6,8 @@ RSpec.describe 'Books Search API', type: :request do
       before do
         # Stub the services to avoid actual API calls
         allow(GeocodingService).to receive(:get_coordinates).and_return([39.7392, -104.9903])
-        
+
+        # Stub to provide correct weather data
         allow(WeatherService).to receive(:get_forecast).and_return(
           current: {
             condition: { text: 'Partly cloudy' },
@@ -14,6 +15,7 @@ RSpec.describe 'Books Search API', type: :request do
           }
         )
 
+        # Stub to provide correct book data from fixture
         allow(BookSearchService).to receive(:new).and_return(
           instance_double(BookSearchService, fetch_books: JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes])
         )
@@ -32,6 +34,34 @@ RSpec.describe 'Books Search API', type: :request do
         expect(json_response[:data][:attributes][:books].size).to eq(5)
         expect(json_response[:data][:attributes][:books].first[:title]).to eq('Denver, Co')
         expect(json_response[:data][:attributes][:books].first[:isbn]).to include('9780762507849', '0762507845')
+      end
+    end
+
+    context 'when the request is invalid or services fail' do
+      before do
+        # Stub the GeocodingService to return valid coordinates
+        allow(GeocodingService).to receive(:get_coordinates).and_return([39.7392, -104.9903])
+
+        # Stub WeatherService to simulate a failure (e.g., API error or empty response)
+        allow(WeatherService).to receive(:get_forecast).and_return({})
+
+        # Stub BookSearchService to simulate a failure or empty response
+        allow(BookSearchService).to receive(:new).and_return(
+          instance_double(BookSearchService, fetch_books: { total_books_found: 0, books: [] })
+        )
+      end
+
+      it 'returns default forecast and empty book results' do
+        get '/api/v1/book-search', params: { location: 'denver,co', quantity: 5 }
+
+        expect(response).to have_http_status(:success)
+        json_response = JSON.parse(response.body, symbolize_names: true)
+
+        expect(json_response[:data][:attributes][:destination]).to eq('denver,co')
+        expect(json_response[:data][:attributes][:forecast][:summary]).to eq('No Summary Available')
+        expect(json_response[:data][:attributes][:forecast][:temperature]).to eq('No Temperature Available')
+        expect(json_response[:data][:attributes][:total_books_found]).to eq(0)
+        expect(json_response[:data][:attributes][:books]).to be_empty
       end
     end
   end

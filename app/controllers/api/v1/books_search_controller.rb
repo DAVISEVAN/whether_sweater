@@ -8,7 +8,7 @@ class Api::V1::BooksSearchController < ApplicationController
       return
     end
 
-    lat, lng = GeocodingService.get_coordinates(location) 
+    lat, lng = GeocodingService.get_coordinates(location) # Assuming this service returns lat/lng based on location
     weather_data = WeatherService.get_forecast(lat, lng)
     forecast = parse_forecast(weather_data)
 
@@ -26,7 +26,7 @@ class Api::V1::BooksSearchController < ApplicationController
   def parse_forecast(weather_data)
     {
       summary: weather_data.dig(:current, :condition, :text) || 'No Summary Available',
-      temperature: "#{weather_data.dig(:current, :temp_f)} F" || 'No Temperature Available'
+      temperature: weather_data.dig(:current, :temp_f).present? ? "#{weather_data.dig(:current, :temp_f)} F" : 'No Temperature Available'
     }
   end
 end

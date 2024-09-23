@@ -10,7 +10,7 @@ class BookSearchService
     response = Faraday.get(OPEN_LIBRARY_URL, { q: @location })
     data = JSON.parse(response.body, symbolize_names: true)
     total_books_found = data[:num_found]
-    books = data[:docs].first(@quantity).map do |book|
+    books = data[:docs].first(@quantity).map do |book| 
       {
         isbn: book[:isbn]&.first(2) || [],
         title: book[:title] || 'No Title Available',
