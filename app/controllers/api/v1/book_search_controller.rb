@@ -3,14 +3,20 @@ class Api::V1::BookSearchController < ApplicationController
     location = params[:location]
     quantity = params[:quantity].to_i
 
-    if quantity <= 0
-      render json: { error: 'Quantity must be a positive integer' }, status: :bad_request
-      return
-    end
+    # Fetch coordinates for the location
+    coordinates = GeocodingService.get_coordinates(location)
+    
+    # Fetch the current weather forecast using the coordinates
+    forecast = WeatherService.get_forecast(coordinates[:lat], coordinates[:lng])
 
-    weather_data = WeatherService.get_forecast(location)
-    books_data = BookSearchService.search_books(location, quantity)
+    # Fetch books related to the location 
+    books_data = OpenLibraryService.search_books(location)
 
-    render json: BookSearchSerializer.new(location, weather_data, books_data).serialized_json
+    # Limit books based on the quantity parameter
+    books = books_data.first(quantity)
+
+    render json: BookSearchSerializer.new(location, forecast, books_data.size, books)
+  rescue StandardError => e
+    render json: { error: e.message }, status: :internal_server_error
   end
 end
