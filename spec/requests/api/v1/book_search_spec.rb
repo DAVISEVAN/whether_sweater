@@ -1,77 +1,38 @@
-# require 'rails_helper'
+require 'rails_helper'
 
-# RSpec.describe 'Book Search API', type: :request do
-#   describe 'GET /api/v1/book-search' do
-#     context 'when the request is valid' do
-#       it 'returns books about the destination city along with current forecast' do
-#         # Mock the Geocoding API response
-#         stub_request(:get, /mapquestapi.com/)
-#           .with(query: hash_including({ 'location' => 'denver,co' }))
-#           .to_return(
-#             status: 200,
-#             body: {
-#               results: [
-#                 {
-#                   locations: [
-#                     {
-#                       latLng: { lat: 39.7392, lng: -104.9903 }
-#                     }
-#                   ]
-#                 }
-#               ]
-#             }.to_json,
-#             headers: { 'Content-Type' => 'application/json' }
-#           )
+RSpec.describe 'Books Search API', type: :request do
+  describe 'GET /api/v1/book-search' do
+    context 'when the request is valid' do
+      before do
+        # Stub the services to avoid actual API calls
+        allow(GeocodingService).to receive(:get_coordinates).and_return([39.7392, -104.9903])
+        
+        allow(WeatherService).to receive(:get_forecast).and_return(
+          current: {
+            condition: { text: 'Partly cloudy' },
+            temp_f: 67.1
+          }
+        )
 
-#         # Mock the Weather API response
-#         stub_request(:get, /weatherapi.com/)
-#           .with(query: hash_including({ 'q' => '39.7392,-104.9903' }))
-#           .to_return(
-#             status: 200,
-#             body: {
-#               current: {
-#                 condition: { text: 'Sunny' },
-#                 temp_f: 75.2
-#               }
-#             }.to_json,
-#             headers: { 'Content-Type' => 'application/json' }
-#           )
+        allow(BookSearchService).to receive(:new).and_return(
+          instance_double(BookSearchService, fetch_books: JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes])
+        )
+      end
 
-#         # Mock the Open Library API response
-#         stub_request(:get, /openlibrary.org/)
-#           .with(query: hash_including({ 'q' => 'denver,co' }))
-#           .to_return(
-#             status: 200,
-#             body: {
-#               numFound: 172,
-#               docs: [
-#                 {
-#                   title: 'Denver, Co',
-#                   publisher: ['Penguin Books'],
-#                   isbn: ['0762507845', '9780762507849']
-#                 },
-#                 {
-#                   title: 'Photovoltaic safety, Denver, CO, 1988',
-#                   publisher: ['American Institute of Physics'],
-#                   isbn: ['9780883183663', '0883183668']
-#                 }
-#                 # Add more mock books later
-#               ]
-#             }.to_json,
-#             headers: { 'Content-Type' => 'application/json' }
-#           )
+      it 'returns the correct book search response' do
+        get '/api/v1/book-search', params: { location: 'denver,co', quantity: 5 }
 
-#         get '/api/v1/book-search', params: { location: 'denver,co', quantity: 5 }
+        expect(response).to have_http_status(:success)
+        json_response = JSON.parse(response.body, symbolize_names: true)
 
-#         expect(response).to have_http_status(:ok)
-#         response_body = JSON.parse(response.body, symbolize_names: true)
-
-#         expect(response_body[:data][:attributes][:destination]).to eq('denver,co')
-#         expect(response_body[:data][:attributes][:forecast][:summary]).to eq('Sunny')
-#         expect(response_body[:data][:attributes][:forecast][:temperature]).to eq('75.2 F')
-#         expect(response_body[:data][:attributes][:total_books_found]).to eq(172)
-#         expect(response_body[:data][:attributes][:books].size).to eq(5)
-#       end
-#     end
-#   end
-# end
+        expect(json_response[:data][:attributes][:destination]).to eq('denver,co')
+        expect(json_response[:data][:attributes][:forecast][:summary]).to eq('Partly cloudy')
+        expect(json_response[:data][:attributes][:forecast][:temperature]).to eq('67.1 F')
+        expect(json_response[:data][:attributes][:total_books_found]).to eq(5)
+        expect(json_response[:data][:attributes][:books].size).to eq(5)
+        expect(json_response[:data][:attributes][:books].first[:title]).to eq('Denver, Co')
+        expect(json_response[:data][:attributes][:books].first[:isbn]).to include('9780762507849', '0762507845')
+      end
+    end
+  end
+end

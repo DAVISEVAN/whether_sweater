@@ -1,16 +1,25 @@
 class BookSearchService
-  BASE_URL = "https://openlibrary.org/search.json"
+  OPEN_LIBRARY_URL = 'http://openlibrary.org/search.json'
 
-  # Ensure the method accepts both location and quantity correctly
-  def self.search_books(location, quantity)
-    response = Faraday.get(BASE_URL) do |req|
-      req.params['q'] = location
-      req.params['limit'] = quantity
+  def initialize(location, quantity)
+    @location = location
+    @quantity = quantity
+  end
+
+  def fetch_books
+    response = Faraday.get(OPEN_LIBRARY_URL, { q: @location })
+    data = JSON.parse(response.body, symbolize_names: true)
+    total_books_found = data[:num_found]
+    books = data[:docs].first(@quantity).map do |book|
+      {
+        isbn: book[:isbn]&.first(2) || [],
+        title: book[:title] || 'No Title Available',
+        publisher: book[:publisher] || ['No Publisher Available']
+      }
     end
-    
-    JSON.parse(response.body, symbolize_names: true)[:docs] # Extract docs to return relevant books
+
+    { total_books_found: total_books_found, books: books }
   rescue Faraday::Error, JSON::ParserError => e
-    Rails.logger.error("BookSearchService Error: #{e.message}")
-    [] # Return an empty array if there's an error to avoid nil issues
+    { error: "Book Search Service Error: #{e.message}" }
   end
 end
