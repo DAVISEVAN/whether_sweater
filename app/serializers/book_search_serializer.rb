@@ -12,12 +12,9 @@ class BookSearchSerializer
         type: 'books',
         attributes: {
           destination: @location,
-          forecast: {
-            summary: @weather_data[:current][:condition][:text],
-            temperature: "#{@weather_data[:current][:temp_f]} F"
-          },
+          forecast: format_forecast(@weather_data),
           total_books_found: @books_data[:num_found],
-          books: format_books(@books_data[:docs])
+          books: format_books(@books_data[:docs] || []) # Ensure docs is an array
         }
       }
     }
@@ -25,13 +22,25 @@ class BookSearchSerializer
 
   private
 
+  def format_forecast(weather_data)
+    {
+      summary: weather_data.dig(:current, :condition, :text) || "Summary unavailable",
+      temperature: "#{weather_data.dig(:current, :temp_f) || 'N/A'} F"
+    }
+  rescue NoMethodError
+    { summary: "Data unavailable", temperature: "N/A" }
+  end
+
   def format_books(books)
     books.map do |book|
       {
-        isbn: book[:isbn] || [],
-        title: book[:title],
-        publisher: book[:publisher] || []
+        isbn: Array(book[:isbn]), # Ensure isbn is always an array
+        title: book[:title] || "Unknown Title",
+        publisher: Array(book[:publisher]) # Ensure publisher is always an array
       }
     end
+  rescue NoMethodError => e
+    Rails.logger.error("Error formatting books: #{e.message}")
+    []
   end
 end

@@ -1,0 +1,42 @@
+{
+    "data": {
+      "id": null,
+      "type": "books",
+      "attributes": {
+        "destination": "denver,co",
+        "forecast": {
+          "summary": "Partly cloudy",
+          "temperature": "67.1 F"
+        },
+        "total_books_found": 5,
+        "books": [
+          {
+            "isbn": ["9780762507849", "0762507845"],
+            "title": "Denver, Co",
+            "publisher": ["Universal Map Enterprises"]
+          },
+          {
+            "isbn": ["1703084756", "9781595478962"],
+            "title": "Up from Slavery",
+            "publisher": ["Value Classic Reprints"]
+          },
+          {
+            "isbn": ["9780060541811", "0586050450"],
+            "title": "The Andromeda Strain",
+            "publisher": ["Harper"]
+          },
+          {
+            "isbn": ["0762557362", "9780762557363"],
+            "title": "Denver Co Deluxe Flip Map",
+            "publisher": ["Universal Map Enterprises"]
+          },
+          {
+            "isbn": ["9781427401687", "1427401683"],
+            "title": "University of Denver Co 2007",
+            "publisher": ["College Prowler"]
+          }
+        ]
+      }
+    }
+  }
+  

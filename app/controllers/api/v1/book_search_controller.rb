@@ -9,13 +9,11 @@ class Api::V1::BookSearchController < ApplicationController
     # Fetch the current weather forecast using the coordinates
     forecast = WeatherService.get_forecast(coordinates[:lat], coordinates[:lng])
 
-    # Fetch books related to the location 
-    books_data = OpenLibraryService.search_books(location)
+    # Fetch books related to the location
+    books_data = BookSearchService.search_books(location, quantity)
 
-    # Limit books based on the quantity parameter
-    books = books_data.first(quantity)
-
-    render json: BookSearchSerializer.new(location, forecast, books_data.size, books)
+    # Render the response using the BookSearchSerializer with correct arguments
+    render json: BookSearchSerializer.new(location, forecast, books_data).serialized_json
   rescue StandardError => e
     render json: { error: e.message }, status: :internal_server_error
   end
