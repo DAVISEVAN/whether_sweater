@@ -247,6 +247,145 @@
           null
         ]
       },
+      "/Users/evandavis/Desktop/whether_sweater/app/controllers/api/v1/road_trips_controller.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          null,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/poros/road_trip.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/facades/road_trip_facade.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          null,
+          null,
+          2,
+          2,
+          2,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/services/directions_service.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          2,
+          null,
+          null,
+          2,
+          null,
+          null,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/serializers/road_trip_serializer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
       "/Users/evandavis/Desktop/whether_sweater/app/models/user.rb": {
         "lines": [
           1,
@@ -372,6 +511,6 @@
         }
       }
     },
-    "timestamp": 1727117270
+    "timestamp": 1727218771
   }
 }

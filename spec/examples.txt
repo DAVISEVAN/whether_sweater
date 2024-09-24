@@ -1,14 +1,16 @@
 example_id                                                | status | run_time        |
 --------------------------------------------------------- | ------ | --------------- |
-./spec/requests/api/v1/book_search_spec.rb[1:1:1:1]       | passed | 0.03222 seconds |
-./spec/requests/api/v1/book_search_spec.rb[1:1:2:1]       | passed | 0.00215 seconds |
-./spec/requests/api/v1/forecasts_spec.rb[1:1:1:1]         | passed | 0.01593 seconds |
-./spec/requests/api/v1/forecasts_spec.rb[1:1:2:1]         | passed | 0.0028 seconds  |
-./spec/requests/api/v1/geocoding_service_spec.rb[1:1:1:1] | passed | 0.00155 seconds |
-./spec/requests/api/v1/geocoding_service_spec.rb[1:1:2:1] | passed | 0.00069 seconds |
-./spec/requests/api/v1/sessions_spec.rb[1:1:1:1]          | passed | 0.02255 seconds |
-./spec/requests/api/v1/sessions_spec.rb[1:1:2:1]          | passed | 0.00466 seconds |
-./spec/requests/api/v1/users_spec.rb[1:1:1:1]             | passed | 0.00548 seconds |
-./spec/requests/api/v1/users_spec.rb[1:1:2:1]             | passed | 0.15617 seconds |
-./spec/requests/api/v1/weather_service_spec.rb[1:1:1:1]   | passed | 0.00135 seconds |
-./spec/requests/api/v1/weather_service_spec.rb[1:1:2:1]   | passed | 0.00097 seconds |
+./spec/requests/api/v1/book_search_spec.rb[1:1:1:1]       | passed | 0.03088 seconds |
+./spec/requests/api/v1/book_search_spec.rb[1:1:2:1]       | passed | 0.00259 seconds |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:1:1]         | passed | 0.01576 seconds |
+./spec/requests/api/v1/forecasts_spec.rb[1:1:2:1]         | passed | 0.00244 seconds |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:1:1] | passed | 0.00115 seconds |
+./spec/requests/api/v1/geocoding_service_spec.rb[1:1:2:1] | passed | 0.0007 seconds  |
+./spec/requests/api/v1/road_trip_spec.rb[1:1:1:1]         | passed | 0.00577 seconds |
+./spec/requests/api/v1/road_trip_spec.rb[1:1:2:1]         | passed | 0.00291 seconds |
+./spec/requests/api/v1/sessions_spec.rb[1:1:1:1]          | passed | 0.02482 seconds |
+./spec/requests/api/v1/sessions_spec.rb[1:1:2:1]          | passed | 0.0046 seconds  |
+./spec/requests/api/v1/users_spec.rb[1:1:1:1]             | passed | 0.00483 seconds |
+./spec/requests/api/v1/users_spec.rb[1:1:2:1]             | passed | 0.14615 seconds |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:1:1]   | passed | 0.00137 seconds |
+./spec/requests/api/v1/weather_service_spec.rb[1:1:2:1]   | passed | 0.0009 seconds  |

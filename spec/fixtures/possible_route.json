@@ -1,0 +1,16 @@
+{
+    "data": {
+      "id": null,
+      "type": "roadtrip",
+      "attributes": {
+        "start_city": "New York, NY",
+        "end_city": "Chicago, IL",
+        "travel_time": "11:35:19",
+        "weather_at_eta": {
+          "datetime": "2024-09-24 12:00",
+          "temperature": 66.1,
+          "condition": "Fog"
+        }
+      }
+    }
+  }

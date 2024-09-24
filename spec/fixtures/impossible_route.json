@@ -1,0 +1,12 @@
+{
+    "data": {
+      "id": null,
+      "type": "roadtrip",
+      "attributes": {
+        "start_city": "New York, NY",
+        "end_city": "London, UK",
+        "travel_time": "impossible route",
+        "weather_at_eta": {}
+      }
+    }
+  }
