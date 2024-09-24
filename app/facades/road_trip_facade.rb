@@ -15,15 +15,23 @@ class RoadTripFacade
   end
 
   def self.calculate_eta(weather_data, travel_time)
-    hours = travel_time.split(':')[0].to_i
-    eta_weather = weather_data[:forecast][:forecastday].first[:hour][hours]
+    hours, minutes, _seconds = travel_time.split(':').map(&:to_i)
+    total_hours = hours + (minutes / 60.0).round
 
-    {
-      datetime: eta_weather[:time],
-      temperature: eta_weather[:temp_f],
-      condition: eta_weather[:condition][:text]
-    }
+    eta_weather = weather_data[:forecast][:forecastday].flat_map { |day| day[:hour] }[total_hours]
+
+    
+    if eta_weather.nil?
+      {}
+    else
+      {
+        datetime: eta_weather[:time],
+        temperature: eta_weather[:temp_f],
+        condition: eta_weather[:condition][:text]
+      }
+    end
   rescue
+    
     {}
   end
 end
