@@ -8,7 +8,7 @@ class Api::V1::BooksSearchController < ApplicationController
       return
     end
 
-    lat, lng = GeocodingService.get_coordinates(location) # Assuming this service returns lat/lng based on location
+    lat, lng = GeocodingService.get_coordinates(location) 
     weather_data = WeatherService.get_forecast(lat, lng)
     forecast = parse_forecast(weather_data)
 
