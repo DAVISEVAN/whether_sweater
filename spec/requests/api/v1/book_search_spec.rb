@@ -4,14 +4,16 @@ RSpec.describe 'Books Search API', type: :request do
   describe 'GET /api/v1/book-search' do
     context 'when the request is valid' do
       before do
-        # Stub the facade instead of direct service calls
-        allow(BooksSearchFacade).to receive(:fetch_data).and_return(
-          forecast: {
-            summary: 'Partly cloudy',
-            temperature: '67.1 F'
-          },
-          books: JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes]
+        # Create a BookSearch instance with forecast and books data for stubbing
+        books_data = JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes]
+        book_search = BookSearch.new(
+          'denver,co',
+          { summary: 'Partly cloudy', temperature: '67.1 F' },
+          books_data
         )
+
+        # Stub the facade to return the BookSearch instance
+        allow(BooksSearchFacade).to receive(:fetch_data).and_return(book_search)
       end
 
       it 'returns the correct book search response' do
@@ -32,14 +34,16 @@ RSpec.describe 'Books Search API', type: :request do
 
     context 'when the request is invalid or services fail' do
       before do
-        # Stub the facade to simulate service failure or empty responses
-        allow(BooksSearchFacade).to receive(:fetch_data).and_return(
-          forecast: {
-            summary: 'No Summary Available',
-            temperature: 'No Temperature Available'
-          },
-          books: { total_books_found: 0, books: [] }
+        # Create a BookSearch instance with default forecast and empty books data
+        books_data = { total_books_found: 0, books: [] }
+        book_search = BookSearch.new(
+          'denver,co',
+          { summary: 'No Summary Available', temperature: 'No Temperature Available' },
+          books_data
         )
+
+        # Stub the facade to return the BookSearch instance simulating failure or empty response
+        allow(BooksSearchFacade).to receive(:fetch_data).and_return(book_search)
       end
 
       it 'returns default forecast and empty book results' do

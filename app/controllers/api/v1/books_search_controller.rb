@@ -10,10 +10,10 @@ class Api::V1::BooksSearchController < ApplicationController
 
     books_search_data = BooksSearchFacade.fetch_data(location, quantity)
 
-    if books_search_data[:error]
-      render json: { error: books_search_data[:error] }, status: :bad_request
+    if books_search_data.error?
+      render json: { error: books_search_data.error_message }, status: :bad_request
     else
-      render json: BookSearchSerializer.new(location, books_search_data[:forecast], books_search_data[:books]).serialize_response
+      render json: BookSearchSerializer.new(books_search_data).serialize_response
     end
   end
 end

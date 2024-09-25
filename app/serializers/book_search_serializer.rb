@@ -1,8 +1,6 @@
 class BookSearchSerializer
-  def initialize(location, forecast, books_data)
-    @location = location
-    @forecast = forecast
-    @books_data = books_data
+  def initialize(book_search)
+    @book_search = book_search
   end
 
   def serialize_response
@@ -11,15 +9,12 @@ class BookSearchSerializer
         id: 'null',
         type: 'books',
         attributes: {
-          destination: @location,
-          forecast: {
-            summary: @forecast[:summary],
-            temperature: @forecast[:temperature]
-          },
-          total_books_found: @books_data[:total_books_found],
-          books: @books_data[:books]
+          destination: @book_search.location,
+          forecast: @book_search.forecast,
+          total_books_found: @book_search.total_books_found,
+          books: @book_search.books
         }
       }
-    }
+    }.to_json
   end
 end
