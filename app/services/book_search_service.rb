@@ -17,9 +17,9 @@ class BookSearchService
         publisher: book[:publisher] || ['No Publisher Available']
       }
     end
-
     { total_books_found: total_books_found, books: books }
-  rescue Faraday::Error, JSON::ParserError => e
-    { error: "Book Search Service Error: #{e.message}" }
+  rescue Faraday::Error => e
+    Rails.logger.error("BookSearchService Error: #{e.message}")
+    { total_books_found: 0, books: [] }
   end
 end

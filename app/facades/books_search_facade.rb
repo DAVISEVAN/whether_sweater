@@ -6,10 +6,9 @@ class BooksSearchFacade
     weather_data = WeatherService.get_forecast(coordinates[:lat], coordinates[:lng])
     books_data = BookSearchService.new(location, quantity).fetch_books
 
-    # Return an instance of BookSearch instead of a hash
     BookSearch.new(location, format_forecast(weather_data), books_data)
   rescue StandardError => e
-    # Handle errors and return an instance of BookSearch with error details
+    
     BookSearch.new(location, { summary: 'No Summary Available', temperature: 'No Temperature Available' }, { total_books_found: 0, books: [] }, error: e.message)
   end
 
