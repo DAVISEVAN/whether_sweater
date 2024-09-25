@@ -4,20 +4,13 @@ RSpec.describe 'Books Search API', type: :request do
   describe 'GET /api/v1/book-search' do
     context 'when the request is valid' do
       before do
-        # Stub the services to avoid actual API calls
-        allow(GeocodingService).to receive(:get_coordinates).and_return([39.7392, -104.9903])
-
-        # Stub to provide correct weather data
-        allow(WeatherService).to receive(:get_forecast).and_return(
-          current: {
-            condition: { text: 'Partly cloudy' },
-            temp_f: 67.1
-          }
-        )
-
-        # Stub to provide correct book data from fixture
-        allow(BookSearchService).to receive(:new).and_return(
-          instance_double(BookSearchService, fetch_books: JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes])
+        # Stub the facade instead of direct service calls
+        allow(BooksSearchFacade).to receive(:fetch_data).and_return(
+          forecast: {
+            summary: 'Partly cloudy',
+            temperature: '67.1 F'
+          },
+          books: JSON.parse(File.read('spec/fixtures/book_search_response.json'), symbolize_names: true)[:data][:attributes]
         )
       end
 
@@ -39,15 +32,13 @@ RSpec.describe 'Books Search API', type: :request do
 
     context 'when the request is invalid or services fail' do
       before do
-        # Stub the GeocodingService to return valid coordinates
-        allow(GeocodingService).to receive(:get_coordinates).and_return([39.7392, -104.9903])
-
-        # Stub WeatherService to simulate a failure (e.g., API error or empty response)
-        allow(WeatherService).to receive(:get_forecast).and_return({})
-
-        # Stub BookSearchService to simulate a failure or empty response
-        allow(BookSearchService).to receive(:new).and_return(
-          instance_double(BookSearchService, fetch_books: { total_books_found: 0, books: [] })
+        # Stub the facade to simulate service failure or empty responses
+        allow(BooksSearchFacade).to receive(:fetch_data).and_return(
+          forecast: {
+            summary: 'No Summary Available',
+            temperature: 'No Temperature Available'
+          },
+          books: { total_books_found: 0, books: [] }
         )
       end
 
