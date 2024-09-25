@@ -9,8 +9,10 @@ RSpec.describe 'User Registration', type: :request do
         post '/api/v1/users', params: valid_attributes.to_json, headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         expect(response).to have_http_status(:created)
-        expect(JSON.parse(response.body)['data']['attributes']['email']).to eq('whatever@example.com')
-        expect(JSON.parse(response.body)['data']['attributes']).to have_key('api_key')
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(json_response[:data][:attributes][:email]).to eq('whatever@example.com')
+        expect(json_response[:data][:attributes]).to have_key(:api_key)
       end
     end
 
@@ -21,7 +23,9 @@ RSpec.describe 'User Registration', type: :request do
         post '/api/v1/users', params: invalid_attributes.to_json, headers: { 'CONTENT_TYPE' => 'application/json', 'ACCEPT' => 'application/json' }
 
         expect(response).to have_http_status(:bad_request)
-        expect(JSON.parse(response.body)['errors']).to include("Password confirmation doesn't match Password")
+        json_response = JSON.parse(response.body, symbolize_names: true)
+        
+        expect(json_response[:errors]).to include("Password confirmation doesn't match Password")
       end
     end
   end

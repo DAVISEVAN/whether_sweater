@@ -433,6 +433,42 @@
           null
         ]
       },
+      "/Users/evandavis/Desktop/whether_sweater/app/services/user_authentication_service.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
       "/Users/evandavis/Desktop/whether_sweater/app/controllers/api/v1/sessions_controller.rb": {
         "lines": [
           1,
@@ -442,38 +478,8 @@
           2,
           1,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           1,
           null,
-          null,
-          null
-        ]
-      },
-      "/Users/evandavis/Desktop/whether_sweater/app/controllers/api/v1/users_controller.rb": {
-        "lines": [
-          1,
-          1,
-          2,
-          2,
-          2,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          2,
           null,
           null
         ]
@@ -485,6 +491,44 @@
           null,
           1,
           1,
+          null,
+          1,
+          2,
+          null,
+          null,
+          1,
+          null,
+          2,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/evandavis/Desktop/whether_sweater/app/controllers/api/v1/users_controller.rb": {
+        "lines": [
+          1,
+          1,
+          2,
+          2,
+          null,
+          2,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          2,
+          null,
           null
         ]
       },
@@ -563,6 +607,6 @@
         }
       }
     },
-    "timestamp": 1727263967
+    "timestamp": 1727264608
   }
 }
